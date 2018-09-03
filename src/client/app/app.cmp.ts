@@ -32,12 +32,6 @@ export function AppCmp(data: AppData) {
 
       <main role="main">${data.content}</main>
 
-      <script>
-        var INIT_DATA = {
-          userId: ${data.user ? data.user.id : undefined}
-        };
-      </script>
-
       <script src="https://connect.facebook.net/en_US/sdk.js"></script>
       <script src="/dist/polyfills.js"></script>
       <script src="/dist/vendor.js"></script>

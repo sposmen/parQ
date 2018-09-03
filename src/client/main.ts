@@ -21,8 +21,8 @@ router
   .use('/', async (req, res, next) => {
     if (req.listening) {
       const cells = await dashboardSrv.findCellAssigns();
-      const userId = await authSrv.currentUserId();
-      const html = DashboardCmp(cells, userId);
+      const user = await authSrv.findCurrentUser();
+      const html = DashboardCmp(cells, user);
       sendHtml(html);
     }
     const cmp = document.querySelector('.dashboard');

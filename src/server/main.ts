@@ -36,9 +36,19 @@ server
   .use('/api/plate', plateApiRouter)
   .use('/api/subscription', subscriptionApiRouter)
   .use('/api/release', releaseApiRouter)
+  .get('/api/auth', async (req, res, next) => {
+    if (req.session.userId) {
+      const user = await userSrv.findOneFullById(req.session.userId);
+      res.json(user);
+      res.end();
+      return;
+    }
+    res.json({});
+    res.end();
+  })
   .get('/api/dashboard', async (req, res, next) => {
     const cells = await dashboardSrv.findCellAssigns();
-    res.send(cells);
+    res.json(cells);
     res.end();
   })
   .use((req, res) => errorHandler(req, res, `Path not found: ${req.method} ${req.url} ${req.originalUrl}`, 404))
@@ -94,12 +104,12 @@ async function loginRouter(req: express.Request, res: express.Response) {
 
 async function dashboardRouter(req: express.Request, res: express.Response) {
 
-  const user = await userSrv.findOneById(req.session.userId);
+  const user = await userSrv.findOneFullById(req.session.userId);
   const cells = await dashboardSrv.findCellAssigns();
 
   try {
 
-    const cmp = DashboardCmp(cells, req.session.userId);
+    const cmp = DashboardCmp(cells, user);
 
     const data: AppData = {
       content: cmp,
@@ -121,7 +131,7 @@ async function logoutRouter(req: express.Request, res: express.Response) {
     }
     const isAjaxRequest = obtainIsAjaxRequest(req);
     if (isAjaxRequest) {
-      res.send({});
+      res.json({});
     } else {
       res.redirect('/');
     }

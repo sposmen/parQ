@@ -89,7 +89,10 @@ export class User extends BasicEntity {
   facebookShortName?: string;
   facebookPicture?: string;
   facebookEmail?: string;
+  @Transient()
   plates?: Plate[];
+  @Transient()
+  subscription?: number;
 }
 
 export class Plate extends BasicEntity {
