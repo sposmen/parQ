@@ -7,6 +7,7 @@ import { PlateItCmp } from "./userDetail.cmp";
 export function UserDetailCtrl(cmp: Element) {
 
   const plateForm = cmp.querySelector('.plate-form') as HTMLFormElement;
+
   plateForm.onsubmit = async evt => {
 
     evt.preventDefault();

@@ -27,6 +27,19 @@ export const dashboardSrv: DashboardSrv = {
   }
 }
 
+// function sanitizePlatesFormat(data: CellAssign[]) {
+
+//   if (!data || data.length === 0) {
+//     return data;
+//   }
+
+//   const resp = data.map(it => {
+//     it.
+//   });
+
+//   return resp;
+// }
+
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
