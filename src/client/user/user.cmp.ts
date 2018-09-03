@@ -12,9 +12,9 @@ export function PlateFormCmp() {
   return `
   <form class="plate-form form">
     <label class="form__label">Plate</label>
-    <input name="plate" class="form__control" type="text" placeholder="enter plate, e.g.: abc123">
+    <input name="plate" class="form__control" type="text" placeholder="enter Licence plate, e.g.: abc123" pattern="\d*" maxlength="10">
     <div class="actions">
-      <button class="btn btn--primary">Add</button>
+      <button class="btn btn--primary">Save</button>
     </div>
   </form>
   `;
