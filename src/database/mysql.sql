@@ -14,7 +14,8 @@ CREATE TABLE User (
   facebookEmail VARCHAR(255) NULL,
   createdBy INTEGER NULL,
   createdAt BIGINT NOT NULL,
-  updatedAt BIGINT NULL
+  updatedAt BIGINT NULL,
+  CONSTRAINT User_fk_createdBy FOREIGN KEY (createdBy) REFERENCES User (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE UNIQUE INDEX User_uk_username ON User (username);
@@ -41,7 +42,8 @@ CREATE TABLE Release_cell (
   suscriptor_id INTEGER NULL,
   createdBy INTEGER NULL,
   createdAt BIGINT NOT NULL,
-  updatedAt BIGINT NULL
+  updatedAt BIGINT NULL,
+  CONSTRAINT Release_cell_fk_createdBy FOREIGN KEY (createdBy) REFERENCES User (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE UNIQUE INDEX Release_uk_plate ON Release_cell(cell, release_date);
