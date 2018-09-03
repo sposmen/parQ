@@ -14,7 +14,7 @@ export function openModal(content: string, options: ModalOptions = {}) {
 
   const opts = {
     ...defaultModalOpts,
-    options
+    ...options
   };
 
   const html = ModalCmp(content);
@@ -80,6 +80,9 @@ export function confirmAction(message: string) {
 
 export function closeModal(modalEl: Element) {
   modalEl.classList.add('hidden');
+  if (!modalEl.parentElement) {
+    return;
+  }
   modalEl.parentElement.removeChild(modalEl);
 }
 
@@ -87,7 +90,7 @@ export function openAlert(content: string, options: AlertOptions = {}) {
 
   const opts = {
     ...defaultAlertOpts,
-    options
+    ...options
   };
 
   const html = AlertCmp(content, opts.type);

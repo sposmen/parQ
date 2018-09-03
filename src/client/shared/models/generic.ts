@@ -89,6 +89,11 @@ export class User extends BasicEntity {
   facebookShortName?: string;
   facebookPicture?: string;
   facebookEmail?: string;
+  plates?: Plate[];
+}
+
+export class Plate extends BasicEntity {
+  plate?: string;
 }
 
 export interface BasicContractSrv<T extends BasicEntity> {
@@ -107,6 +112,8 @@ export interface BasicContractSrv<T extends BasicEntity> {
 }
 
 export interface UserContractSrv extends BasicContractSrv<User> { }
+
+export interface PlateContractSrv extends BasicContractSrv<Plate> { }
 
 export interface NotificationCallback {
   (notificationType: NotificationType, err?: string): void;
@@ -129,4 +136,10 @@ export interface AlertOptions extends ModalOptions {
   type?: AlertType;
   maxWidth?: string;
   wait?: number;
+}
+
+export interface AppData {
+  content: string;
+  path: string;
+  user: User;
 }

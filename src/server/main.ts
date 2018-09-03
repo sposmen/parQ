@@ -5,15 +5,16 @@ import * as expressMySqlSession from 'express-mysql-session';
 
 import { errorHandler, obtainIsAjaxRequest } from './shared/utils/http.util';
 import { AppCmp } from '../client/app/app.cmp';
-import { HomeCmp } from '../client/home/home.cmp';
 import { AboutCmp } from '../client/about/about.cmp';
 import { facebookApiRouter } from './facebook/facebook.router';
 import { pool } from './shared/utils/db.util';
-import { AppData } from './shared/models/business';
-import { userSrv } from './shared/services/basic.srv';
-import { cellAssigns} from './shared/services/cellAssigns.srv';
+import { AppData } from './shared/models/generic';
+import { userSrv } from './shared/services/user.srv';
+import { cellAssigns } from './shared/services/cellAssigns.srv';
 import { LoginCmp } from '../client/login/login.cmp';
 import { DashboardCmp } from '../client/dashboard/dashboard.cmp';
+import { plateApiRouter } from './plate/plate.router';
+import { userApiRouter } from './user/user.router';
 
 const session = buildSession();
 const server = express();
@@ -28,30 +29,11 @@ server
   .post('/logout', logoutRouter)
   .get('/about', aboutRouter)
   .use('/api/facebook', facebookApiRouter)
+  .use('/api/user', userApiRouter)
+  .use('/api/plate', plateApiRouter)
   .use((req, res) => errorHandler(req, res, `Path not found: ${req.method} ${req.url} ${req.originalUrl}`, 404))
   .listen(4200);
 
-
-async function homeRouter(req: express.Request, res: express.Response) {
-
-  const cmp = HomeCmp();
-
-  try {
-
-    const user = await userSrv.findOneById(req.session.userId);
-
-    const data: AppData = {
-      content: cmp,
-      path: req.originalUrl,
-      user: user
-    };
-
-    res.end(AppCmp(data));
-
-  } catch (err) {
-    errorHandler(req, res, err);
-  }
-}
 
 async function aboutRouter(req: express.Request, res: express.Response) {
 
@@ -104,7 +86,7 @@ async function dashboardRouter(req: express.Request, res: express.Response) {
 
   const user = await userSrv.findOneById(req.session.userId);
 
-  function processResult(cells: any){
+  function processResult(cells: any) {
     try {
 
       const cmp = DashboardCmp(cells);
@@ -123,9 +105,7 @@ async function dashboardRouter(req: express.Request, res: express.Response) {
     }
   }
 
-  cellAssigns(processResult)
-
-
+  cellAssigns(processResult);
 }
 
 async function logoutRouter(req: express.Request, res: express.Response) {
