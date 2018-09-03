@@ -1,0 +1,9 @@
+{
+  "verbose": true,
+  "watch": [
+    "dist-server"
+  ],
+  "ignore": [
+  ],
+  "ext": "js"
+}
