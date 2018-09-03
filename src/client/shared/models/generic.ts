@@ -100,6 +100,12 @@ export class Subscription extends BasicEntity {
 
 }
 
+export class Release extends BasicEntity {
+  cell?: string;
+  release_date?: Date;
+  suscriptor_id?: Date;
+}
+
 export interface BasicContractSrv<T extends BasicEntity> {
 
   saveOne(data: T, userId?: number): Promise<number>;
