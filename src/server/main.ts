@@ -15,6 +15,7 @@ import { LoginCmp } from '../client/login/login.cmp';
 import { DashboardCmp } from '../client/dashboard/dashboard.cmp';
 import { plateApiRouter } from './plate/plate.router';
 import { userApiRouter, userRouter } from './user/user.router';
+import { subscriptionApiRouter } from './subscription/subscription.router';
 
 const session = buildSession();
 const server = express();
@@ -32,6 +33,7 @@ server
   .use('/user', userRouter)
   .use('/api/user', userApiRouter)
   .use('/api/plate', plateApiRouter)
+  .use('/api/subscription', subscriptionApiRouter)
   .get('/api/dashboard', async (req, res, next) => {
     const cells = await dashboardSrv.findCellAssigns();
     res.send(cells);
