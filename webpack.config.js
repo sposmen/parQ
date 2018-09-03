@@ -1,5 +1,10 @@
 // tslint:disable: no-var-requires no-require-imports
 const path = require('path');
+const webpack = require('webpack');
+const miniCssExtractPlugin = require('mini-css-extract-plugin');
+const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
+const copyWebpackPlugin = require('copy-webpack-plugin');
+const postcssPresetEnv = require('postcss-preset-env');
 
 
 module.exports = (mode = 'development') => {
@@ -10,7 +15,7 @@ module.exports = (mode = 'development') => {
 
     mode: mode,
 
-    devtool: 'source-map',
+    devtool: 'eval-source-map',
 
     resolve: {
       extensions: ['.ts', '.js', '.scss']
@@ -61,6 +66,28 @@ module.exports = (mode = 'development') => {
           }
         },
         {
+          test: /\.scss$/,
+          use: [
+            miniCssExtractPlugin.loader,
+            'css-loader?sourceMap=true',
+            {
+              loader: 'postcss-loader',
+              options: {
+                sourceMap: true,
+                ident: 'postcss',
+                plugins: () => [
+                  postcssPresetEnv({
+                    stage: 2,
+                    features: {
+                      'nesting-rules': true
+                    }
+                  })
+                ]
+              }
+            }
+          ],
+        },
+        {
           test: /\.(png|jpg|gif|svg|eot|ttf|woff)$/,
           loader: 'url-loader',
           options: {
@@ -72,7 +99,14 @@ module.exports = (mode = 'development') => {
     },
 
     plugins: [
-
+      new webpack.optimize.ModuleConcatenationPlugin(),
+      new copyWebpackPlugin([
+        { from: 'src/assets', to: 'assets' },
+      ]),
+      new miniCssExtractPlugin({
+        filename: 'main.css',
+      }),
+      new CheckerPlugin(),
     ]
   };
 
