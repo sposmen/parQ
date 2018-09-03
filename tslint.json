@@ -94,7 +94,7 @@
     "callable-types": false,
     "prefer-for-of": false,
     "ban-types": [true, ["String"]],
-    "no-any": true,
+    "no-any": false,
     "no-unnecessary-class": true,
     "no-non-null-assertion": true,
     "no-parameter-reassignment": true,

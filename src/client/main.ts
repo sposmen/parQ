@@ -10,6 +10,8 @@ import { openModal } from './shared/utils/modal.util';
 import { LoginCtrl } from './login/login.ctrl';
 import { sendHtml } from './shared/utils/dom.util';
 import { HomeCmp } from './home/home.cmp';
+import { UserCmp } from './user/user.cmp';
+import { DashboardCmp } from './dashboard/dashboard.cmp';
 
 router
   .use('/', async (req, res, next) => {
@@ -43,6 +45,17 @@ router
     if (req.listening) {
       const html = AboutCmp();
       sendHtml(html);
+    }
+    next();
+  })
+  .use('/user/:id(\\d+)', (req, res, next) => {
+    if (req.listening) {
+      const plates: string[] = [];
+      const html = UserCmp(plates);
+    }})
+  .use('/dashboard', (req, res, next) => {
+    if (req.listening) {
+      const html = DashboardCmp([]);
     }
     next();
   })
