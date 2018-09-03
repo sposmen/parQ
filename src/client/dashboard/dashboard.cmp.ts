@@ -31,14 +31,14 @@ function subscribeCmp(user?: User) {
   `;
 }
 
-function cellAssignsCmp(assigns: any, user?: User) {
-  return assigns.map((assign: any) => {
+function cellAssignsCmp(assigns: CellAssign[], user?: User) {
+  return assigns.map(assign => {
     return `<div class="card-it">
         <div class="dashboard-card-left">
           <p><b>User: </b>${assign.name}</p>
-          <p><b>License Plate: </b>${assign.plate}</p>
+          <p><b>License Plate: </b>${assign.plates.join(', ')}</p>
           <p><b>Assigned cell: </b>${assign.slot < 9 ? '0' + assign.slot : assign.slot}</p>
-          <p><b>Car model: </b>${assign.model}</p>
+          <p><b>Car model: </b>${assign.models.join(', ')}</p>
         </div>
         <div class="dashboard-card-right">
           <button class="btn">Release</button>

@@ -85,14 +85,21 @@ function listPlates(auth: any, cb: any) {
       const finalData: CellAssign[] = [];
       rows.forEach((row: any) => {
         if (!row[3] && deDuplicator.hasOwnProperty(lastCell)) {
-          deDuplicator[lastCell].plate = `${deDuplicator[lastCell].plate} <br> ${row[1]}`
-          deDuplicator[lastCell].model = `${deDuplicator[lastCell].model} <br> ${row[2]}`
+          const cellAssign: CellAssign = deDuplicator[lastCell];
+          cellAssign.plates.push(row[1]);
+          cellAssign.models.push(row[2]);
         } else if (row[3]) {
           lastCell = row[3];
-          deDuplicator[row[3]] = { name: row[0], plate: row[1], model: row[2], slot: row[3] };
+          const cellAssign: CellAssign = {};
+          cellAssign.plates = [];
+          cellAssign.models = [];
+          cellAssign.name = row[0];
+          cellAssign.plates.push(row[1]);
+          cellAssign.models.push(row[2]);
+          cellAssign.slot = row[3];
+          deDuplicator[row[3]] = cellAssign;
           finalData.push(deDuplicator[row[3]])
         }
-        return;
       });
       cb(finalData)
     } else {
