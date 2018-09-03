@@ -25,7 +25,6 @@ export function AppCmp(data: AppData) {
       <section class="header">
         <nav class="nav clearfix">
           <a class="nav__link" href="/"><span class="sr-only">${APP_TITLE}</span></a>
-          <a class="nav__link" href="/">Home</a>
           <a class="nav__link" href="/about">About</a>
           ${AuthCmp(data.user)}
         </nav>
