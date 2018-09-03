@@ -1,0 +1,54 @@
+{
+  "name": "parq",
+  "version": "1.0.0",
+  "scripts": {
+    "tslint": "tslint --fix --config tslint.json --exclude '**/*.d.ts' 'src/**/*.ts'",
+    "lint": "npm run tslint",
+    "client.watch": "rimraf dist && webpack --progress --profile --bail --watch",
+    "client.watch.prod": "rimraf dist && webpack --progress --profile --bail --watch --mode=production",
+    "client.prod": "rimraf dist && webpack --progress --profile --bail --mode=production",
+    "server.watch": "rimraf dist-server && tsc -w -p src/server",
+    "server": "nodemon dist-server/server/main.js",
+    "start": "npm run server"
+  },
+  "dependencies": {
+    "body-parser": "1.18.3",
+    "express": "4.16.3",
+    "express-mysql-session": "2.0.1",
+    "express-session": "1.15.6",
+    "mysql": "2.16.0",
+    "node-fetch": "2.2.0",
+    "prouter": "8.0.5",
+    "sqlstring": "2.3.1"
+  },
+  "devDependencies": {
+    "@types/express": "4.16.0",
+    "@types/node": "10.9.4",
+    "awesome-typescript-loader": "5.2.0",
+    "copy-webpack-plugin": "4.5.2",
+    "css-loader": "1.0.0",
+    "mini-css-extract-plugin": "0.4.2",
+    "nodemon": "1.18.4",
+    "postcss-loader": "3.0.0",
+    "postcss-preset-env": "5.3.0",
+    "rimraf": "2.6.2",
+    "source-map-loader": "0.2.4",
+    "style-loader": "0.23.0",
+    "tslint": "5.11.0",
+    "tslint-loader": "3.6.0",
+    "typescript": "3.0.3",
+    "url-loader": "1.1.1",
+    "webpack": "4.17.1",
+    "webpack-cli": "3.1.0",
+    "webpack-log": "2.0.0"
+  },
+  "keywords": [
+    "park",
+    "parking"
+  ],
+  "license": "private",
+  "private": true,
+  "engines": {
+    "node": ">= 8.0.0"
+  }
+}
