@@ -88,19 +88,29 @@ function getNewToken(oAuth2Client: any, callback: any) {
 
 function listPlates(auth: any, cb: any) {
   const sheets = google.sheets({version: 'v4', auth});
-  let last_name = '';
+
+  let lastCell = '';
+
   sheets.spreadsheets.values.get({
     spreadsheetId: '1zNG4LXOamD0EXMiWphuMlXzcaCJSP0enRBBcFTCYeeI',
-    range: 'Septiembre 2018!A3:B27',
+    range: 'Septiembre 2018!A3:D27',
   }, (err: any, res: any) => {
     if (err) return console.log('The API returned an error: ' + err);
     const rows = res.data.values;
     if (rows.length) {
-      let data = rows.map((row: any) => {
-        last_name = row[0] ? row[0] : last_name;
-        return {name: last_name, plate: row[1]};
+      let deDuplicator = {};
+      let finalData: any[] = [];
+      rows.forEach((row: any) => {
+        if(!row[3] && deDuplicator.hasOwnProperty(lastCell)){
+          deDuplicator[lastCell].plate = `${deDuplicator[lastCell].plate}, ${row[1]}`
+        } else if (row[3]){
+          lastCell = row[3];
+          deDuplicator[row[3]] = {name: row[0], plate: row[1], slot: row[3]};
+          finalData.push(deDuplicator[row[3]])
+        }
+        return ;
       });
-      cb(data)
+      cb(finalData)
     } else {
       cb([]);
     }

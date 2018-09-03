@@ -6,6 +6,7 @@ export function DashboardCmp(assigns: any) {
         <tr>
           <th>Name</th>
           <th>Plate</th>
+          <th>Slot</th>
         </tr>
         ${renderAssigns(assigns)}
       </table>
@@ -15,11 +16,11 @@ export function DashboardCmp(assigns: any) {
 
 function renderAssigns(assigns: any) {
   return assigns.map((assign: any) => {
-    return `<tr>
+      return `<tr>
       <th>${assign.name}</th>
       <th>${assign.plate}</th>
-      </tr> `;
-  }
-  ).join('\n');
-
+      <th>${assign.slot}</th>
+      </tr> `
+    }
+  ).join('\n')
 }
