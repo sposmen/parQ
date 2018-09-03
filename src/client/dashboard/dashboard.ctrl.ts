@@ -1,5 +1,6 @@
 import './dashboard.style';
 import { subscriptionSrv } from '../shared/services/basic.srv';
+import { openAlert } from '../shared/utils/modal.util';
 
 export function DashboardCtrl(cmp: Element) {
 
@@ -10,9 +11,11 @@ export function DashboardCtrl(cmp: Element) {
     if (isSubscribed) {
       const id = await subscriptionSrv.saveOne({})
       subscribeBtn.value = '' + id;
+      openAlert('Subscribed');
     } else {
       const id = parseInt(subscribeBtn.value, 10);
-      subscriptionSrv.removeOneById(id);
+      await subscriptionSrv.removeOneById(id);
+      openAlert('Unsubscribed', { type: 'warning' });
     }
   };
 }

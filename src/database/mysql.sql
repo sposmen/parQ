@@ -45,3 +45,13 @@ CREATE TABLE Release_cell (
 );
 
 CREATE UNIQUE INDEX Release_uk_plate ON Release_cell(cell, release_date);
+
+
+CREATE TABLE Subscription (
+  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  createdBy INTEGER NULL,
+  createdAt BIGINT NOT NULL,
+  updatedAt BIGINT NULL,
+  CONSTRAINT Subscription_fk_createdBy FOREIGN KEY (createdBy) REFERENCES User (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
