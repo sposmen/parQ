@@ -142,6 +142,10 @@ a,
     display: block;
     float: right;
   }
+
+  & .user-image {
+    border-radius: 50%;
+  }
 }
 
 .header .btn-link,
@@ -158,6 +162,7 @@ a,
     color: rgb(0, 0, 139);
   }
 }
+
 
 .nav__link:first-child {
   opacity: 0.85;
