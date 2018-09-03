@@ -126,6 +126,8 @@ export interface UserContractSrv extends BasicContractSrv<User> { }
 export interface PlateContractSrv extends BasicContractSrv<Plate> { }
 export interface SubscriptionContractSrv extends BasicContractSrv<Subscription> { }
 
+export interface ReleaseContractSrv extends BasicContractSrv<Plate> { }
+
 export interface DashboardSrv {
   findCellAssigns(): Promise<CellAssign[]>;
 }

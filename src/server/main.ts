@@ -14,6 +14,7 @@ import { dashboardSrv } from './shared/services/cellAssigns.srv';
 import { LoginCmp } from '../client/login/login.cmp';
 import { DashboardCmp } from '../client/dashboard/dashboard.cmp';
 import { plateApiRouter } from './plate/plate.router';
+import { releaseApiRouter } from './release/release.router';
 import { userApiRouter, userRouter } from './user/user.router';
 import { subscriptionApiRouter } from './subscription/subscription.router';
 
@@ -34,6 +35,7 @@ server
   .use('/api/user', userApiRouter)
   .use('/api/plate', plateApiRouter)
   .use('/api/subscription', subscriptionApiRouter)
+  .use('/api/release', releaseApiRouter)
   .get('/api/dashboard', async (req, res, next) => {
     const cells = await dashboardSrv.findCellAssigns();
     res.send(cells);

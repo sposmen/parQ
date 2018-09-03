@@ -1,7 +1,6 @@
 import * as express from 'express';
 import { releaseSrv } from '../shared/services/release.srv';
 import {errorHandler} from "../shared/utils/http.util";
-import { userSrv } from '../shared/services/user.srv';
 
 export const releaseApiRouter = express.Router();
 
