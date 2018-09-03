@@ -8,7 +8,7 @@ import { AppCmp } from '../client/app/app.cmp';
 import { AboutCmp } from '../client/about/about.cmp';
 import { facebookApiRouter } from './facebook/facebook.router';
 import { pool } from './shared/utils/db.util';
-import { AppData } from './shared/models/generic';
+import { AppData, User } from './shared/models/generic';
 import { userSrv } from './shared/services/user.srv';
 import { dashboardSrv } from './shared/services/cellAssigns.srv';
 import { LoginCmp } from '../client/login/login.cmp';
@@ -43,7 +43,7 @@ server
       res.end();
       return;
     }
-    res.json({});
+    res.json(null);
     res.end();
   })
   .get('/api/dashboard', async (req, res, next) => {
@@ -104,7 +104,12 @@ async function loginRouter(req: express.Request, res: express.Response) {
 
 async function dashboardRouter(req: express.Request, res: express.Response) {
 
-  const user = await userSrv.findOneFullById(req.session.userId);
+  let user: User;
+
+  if (req.session.userId) {
+    user = await userSrv.findOneFullById(req.session.userId);
+  }
+
   const cells = await dashboardSrv.findCellAssigns();
 
   try {
