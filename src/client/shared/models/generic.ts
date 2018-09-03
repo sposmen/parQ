@@ -115,6 +115,10 @@ export interface UserContractSrv extends BasicContractSrv<User> { }
 
 export interface PlateContractSrv extends BasicContractSrv<Plate> { }
 
+export interface DashboardSrv {
+  findCellAssigns(): Promise<CellAssign[]>;
+}
+
 export interface NotificationCallback {
   (notificationType: NotificationType, err?: string): void;
 }
@@ -142,4 +146,10 @@ export interface AppData {
   content: string;
   path: string;
   user: User;
+}
+
+export interface CellAssign {
+  name?: string;
+  plate?: string;
+  slot?: string;
 }

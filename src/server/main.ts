@@ -10,7 +10,7 @@ import { facebookApiRouter } from './facebook/facebook.router';
 import { pool } from './shared/utils/db.util';
 import { AppData } from './shared/models/generic';
 import { userSrv } from './shared/services/user.srv';
-import { cellAssigns } from './shared/services/cellAssigns.srv';
+import { dashboardSrv } from './shared/services/cellAssigns.srv';
 import { LoginCmp } from '../client/login/login.cmp';
 import { DashboardCmp } from '../client/dashboard/dashboard.cmp';
 import { plateApiRouter } from './plate/plate.router';
@@ -31,6 +31,11 @@ server
   .use('/api/facebook', facebookApiRouter)
   .use('/api/user', userApiRouter)
   .use('/api/plate', plateApiRouter)
+  .get('/api/dashboard', async (req, res, next) => {
+    const cells = await dashboardSrv.findCellAssigns();
+    res.send(cells);
+    res.end();
+  })
   .use((req, res) => errorHandler(req, res, `Path not found: ${req.method} ${req.url} ${req.originalUrl}`, 404))
   .listen(4200);
 
@@ -85,27 +90,23 @@ async function loginRouter(req: express.Request, res: express.Response) {
 async function dashboardRouter(req: express.Request, res: express.Response) {
 
   const user = await userSrv.findOneById(req.session.userId);
+  const cells = await dashboardSrv.findCellAssigns();
 
-  function processResult(cells: any) {
-    try {
+  try {
 
-      const cmp = DashboardCmp(cells);
+    const cmp = DashboardCmp(cells);
 
+    const data: AppData = {
+      content: cmp,
+      path: req.originalUrl,
+      user: user
+    };
 
-      const data: AppData = {
-        content: cmp,
-        path: req.originalUrl,
-        user: user
-      };
+    res.end(AppCmp(data));
 
-      res.end(AppCmp(data));
-
-    } catch (err) {
-      errorHandler(req, res, err);
-    }
+  } catch (err) {
+    errorHandler(req, res, err);
   }
-
-  cellAssigns(processResult);
 }
 
 async function logoutRouter(req: express.Request, res: express.Response) {

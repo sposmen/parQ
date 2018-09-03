@@ -13,11 +13,13 @@ import { DashboardCmp } from './dashboard/dashboard.cmp';
 import { UserDetailCmp } from './user/userDetail.cmp';
 import { userSrv } from './shared/services/basic.srv';
 import { UserDetailCtrl } from './user/userDetail.ctrl';
+import { dashboardSrv } from './shared/services/dasboard.srv';
 
 router
   .use('/', async (req, res, next) => {
     if (req.listening) {
-      const html = DashboardCmp([]);
+      const cells = await dashboardSrv.findCellAssigns();
+      const html = DashboardCmp(cells);
       sendHtml(html);
     }
     next();

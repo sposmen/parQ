@@ -10,7 +10,7 @@
     "member-ordering": [true, { "order": "fields-first" }],
     "no-inferrable-types": [true],
     "no-internal-module": true,
-    "curly": true,
+    "curly": false,
     "cyclomatic-complexity": [true, 10],
     "forin": false,
     "label-position": true,
@@ -29,7 +29,7 @@
     ],
     "no-unnecessary-initializer": true,
     "one-variable-per-declaration": [true],
-    "semicolon": [true, "always"],
+    "semicolon": [false, "always"],
     "max-classes-per-file": [false, 1],
     "max-file-line-count": [true, 300],
     "max-line-length": false,
@@ -55,20 +55,22 @@
     "array-type": [true, "array"],
     "no-empty-interface": false,
     "prefer-conditional-expression": false,
-    "object-literal-key-quotes": [true, "consistent-as-needed"],
+    "object-literal-key-quotes": [false, "consistent-as-needed"],
     "indent": [
       true,
       "spaces"
     ],
-    "no-require-imports": true,
+    "space-before-function-paren": false,
+    "no-require-imports": false,
     "trailing-comma": [
-      true,
+      false,
       {
         "multiline": "never",
         "singleline": "never"
       }
     ],
     "arrow-parens": [false],
+    "only-arrow-functions": false,
     "align": [true],
     "class-name": true,
     "comment-format": [
@@ -98,7 +100,7 @@
     "no-unnecessary-class": true,
     "no-non-null-assertion": true,
     "no-parameter-reassignment": true,
-    "no-var-requires": true,
+    "no-var-requires": false,
     "ban-comma-operator": true,
     "no-return-await": true,
     "prefer-const": true,
