@@ -1,4 +1,4 @@
-export function DashboardCmp (assigns) {
+export function DashboardCmp(assigns: any) {
   return `
     <div class="about">
       <h1>Dashboard</h1>
@@ -13,13 +13,13 @@ export function DashboardCmp (assigns) {
   `;
 }
 
-function renderAssigns (assigns) {
-  return assigns.map((assign) => {
-      return `<tr>
+function renderAssigns(assigns: any) {
+  return assigns.map((assign: any) => {
+    return `<tr>
       <th>${assign.name}</th>
       <th>${assign.plate}</th>
-      </tr> `
-    }
-  ).join('\n')
+      </tr> `;
+  }
+  ).join('\n');
 
 }

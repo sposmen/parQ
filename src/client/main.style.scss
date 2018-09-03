@@ -147,7 +147,7 @@ a, .btn, .btn-link {
   margin-right: 1.0rem;
   width: var(--logo-width);
   height: var(--logo-height);
-  background-image: url('../assets/img/logo-small.png');
+  background-image: url('../assets/img/logo.svg');
   background-size: var(--logo-width) var(--logo-height);
   background-color: transparent;
   background-repeat: no-repeat;
@@ -373,3 +373,16 @@ main {
 .plate-list {
   margin-top: 2rem;
 }
+
+
+.about {
+    &>p {
+      margin-bottom: 0.5em !important;
+    }
+    &>.logo-about {
+      padding-top: 3.5em;
+      display: block;
+      margin: 0 auto;
+      width :300px;
+    }
+  }

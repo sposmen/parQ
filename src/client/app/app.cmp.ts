@@ -15,7 +15,7 @@ export function AppCmp(data: AppData) {
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="theme-color" content="#4682b4"/>
       <title>${title}</title>
-      <link href="/dist/assets/img/logo-small.png?" rel="icon" type="image/png">
+      <link href="/dist/assets/img/favicon.png?v=3" rel="icon" type="image/png">
       <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400|Open+Sans:300,400" rel="stylesheet">
       <link href="https://unpkg.com/bootstrap@4.1.3/dist/css/bootstrap-reboot.min.css" rel="stylesheet">
       <link href="/dist/main.css" rel="stylesheet">

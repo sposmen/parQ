@@ -32,7 +32,7 @@
     "semicolon": [true, "always"],
     "max-classes-per-file": [false, 1],
     "max-file-line-count": [true, 300],
-    "max-line-length": [true, 250],
+    "max-line-length": false,
     "no-construct": true,
     "no-debugger": true,
     "no-duplicate-variable": true,
