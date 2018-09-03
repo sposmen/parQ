@@ -1,5 +1,8 @@
+import { User } from "../models/generic";
+import { get } from "../utils/http.util";
+
 export const authSrv = {
-  currentUserId() {
-    return Promise.resolve<number>(window.INIT_DATA.userId);
+  findCurrentUser() {
+    return get<User>('/api/auth');
   }
 };

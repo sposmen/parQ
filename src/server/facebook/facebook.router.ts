@@ -55,6 +55,6 @@ facebookApiRouter.post('/login', async (req, res) => {
     req.session.userId = newUser.id;
   }
 
-  res.send(resp);
+  res.json(resp);
   res.end();
 });

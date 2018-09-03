@@ -1,34 +1,37 @@
-import { CellAssign } from "../shared/models/generic";
+import { CellAssign, User } from "../shared/models/generic";
 
-export function DashboardCmp(assigns: CellAssign[], userId?: number) {
+export function DashboardCmp(assigns: CellAssign[], user?: User) {
   return `
     <div class="dashboard card-list">
 
       <h1>Dashboard</h1>
 
-      ${subscribe(userId)}
+      ${subscribeCmp(user)}
 
-      ${renderAssigns(assigns, userId)}
+      ${cellAssignsCmp(assigns, user)}
 
     </div>
   `;
 }
 
-function subscribe(userId?: number) {
+function subscribeCmp(user?: User) {
 
-  if (!userId) {
+  if (!user) {
     return '';
   }
 
   return `
-  <label class="subscribe switch">
-    <input type="checkbox">
-    <span class="slider round"></span>
-  </label>
+  <div>
+    <label class="subscribe switch" tooltip="Subscribe / Unsubscribe">
+      <input type="checkbox" value="${user.subscription}" ${user.subscription ? 'checked' : ''}>
+      <span class="slider round"></span>
+    </label>
+    <span class="switch-text">${user.subscription ? 'Unsubscribe' : 'Subscribe'}</span>
+  </div>
   `;
 }
 
-function renderAssigns(assigns: any, userId?: number) {
+function cellAssignsCmp(assigns: any, user?: User) {
   return assigns.map((assign: any) => {
     return `<div class="card-it">
         <div class="dashboard-card-left">
