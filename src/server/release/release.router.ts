@@ -1,7 +1,6 @@
 import * as express from 'express';
 import { releaseSrv } from '../shared/services/release.srv';
 import {errorHandler} from "../shared/utils/http.util";
-import { userSrv } from '../shared/services/user.srv';
 
 export const releaseApiRouter = express.Router();
 
@@ -17,7 +16,7 @@ async function save(req: express.Request, res: express.Response) {
 
     release.release_date = new Date().toISOString().slice(0, 10);
 
-    const id = await releaseSrv.saveOne(release, req.session.userId);
+    const id = await releaseSrv.saveOne(req.body, req.session.userId);
     res.json(id.toString());
     res.end();
   } catch (err) {
