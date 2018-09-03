@@ -34,6 +34,18 @@ CREATE TABLE Plate (
 CREATE UNIQUE INDEX Plate_uk_plate ON Plate (plate);
 
 
+CREATE TABLE Release_cell (
+  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  cell VARCHAR(2) NOT NULL,
+  release_date DATE NOT NULL,
+  suscriptor_id INTEGER NULL,
+  createdBy INTEGER NULL,
+  createdAt BIGINT NOT NULL,
+  updatedAt BIGINT NULL
+);
+
+CREATE UNIQUE INDEX Release_uk_plate ON Release_cell(cell, release_date);
+
 
 CREATE TABLE Subscription (
   id INTEGER PRIMARY KEY AUTO_INCREMENT,
@@ -42,3 +54,4 @@ CREATE TABLE Subscription (
   updatedAt BIGINT NULL,
   CONSTRAINT Subscription_fk_createdBy FOREIGN KEY (createdBy) REFERENCES User (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
