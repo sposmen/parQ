@@ -20,3 +20,15 @@ CREATE TABLE User (
 CREATE UNIQUE INDEX User_uk_username ON User (username);
 CREATE UNIQUE INDEX User_uk_facebookId ON User (facebookId);
 CREATE UNIQUE INDEX User_uk_facebookEmail ON User (facebookEmail);
+
+CREATE TABLE Plate (
+  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  plate VARCHAR(10) NOT NULL,
+  createdBy INTEGER NULL,
+  createdAt BIGINT NOT NULL,
+  updatedAt BIGINT NULL,
+  CONSTRAINT Plate_fk_createdBy FOREIGN KEY (createdBy) REFERENCES User (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE UNIQUE INDEX Plate_uk_plate ON Plate (plate);
+

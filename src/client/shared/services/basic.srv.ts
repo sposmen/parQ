@@ -1,7 +1,7 @@
 import { get, put, post, remove } from '../utils/http.util';
 import { normalizeName } from '../utils/string.util';
 import { stringifyQueryMeta } from '../utils/query.util';
-import { BasicEntity, QueryMeta, BasicContractSrv } from '../models/generic';
+import { BasicEntity, QueryMeta, BasicContractSrv, User, UserContractSrv, Plate, PlateContractSrv } from '../models/generic';
 
 
 export function generateBasicService<T extends BasicEntity>(type: { new(): T }): BasicContractSrv<T> {
@@ -42,3 +42,6 @@ export function generateBasicService<T extends BasicEntity>(type: { new(): T }):
   };
 }
 
+
+export const userSrv: UserContractSrv = generateBasicService(User);
+export const plateSrv: PlateContractSrv = generateBasicService(Plate);

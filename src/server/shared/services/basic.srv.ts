@@ -26,6 +26,10 @@ export function generateBasicService<T extends BasicEntity>(type: { new(): T }):
         return;
       }
 
+      if (!data.createdBy) {
+        return data;
+      }
+
       const sqlUser = buildQueryOne(User, {
         fields: 'id, displayName',
         filter: [{ id: data.createdBy }]
@@ -62,7 +66,3 @@ export function generateBasicService<T extends BasicEntity>(type: { new(): T }):
 
   };
 }
-
-
-export const userSrv: UserContractSrv = generateBasicService(User);
-

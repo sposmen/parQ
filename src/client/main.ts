@@ -9,14 +9,15 @@ import { LoginCmp } from './login/login.cmp';
 import { openModal } from './shared/utils/modal.util';
 import { LoginCtrl } from './login/login.ctrl';
 import { sendHtml } from './shared/utils/dom.util';
-import { HomeCmp } from './home/home.cmp';
-import { UserCmp } from './user/user.cmp';
 import { DashboardCmp } from './dashboard/dashboard.cmp';
+import { UserDetailCmp } from './user/userDetail.cmp';
+import { userSrv } from './shared/services/basic.srv';
+import { UserDetailCtrl } from './user/userDetail.ctrl';
 
 router
   .use('/', async (req, res, next) => {
     if (req.listening) {
-      const html = HomeCmp();
+      const html = DashboardCmp([]);
       sendHtml(html);
     }
     next();
@@ -48,15 +49,14 @@ router
     }
     next();
   })
-  .use('/user/:id(\\d+)', (req, res, next) => {
+  .use('/user/:id(\\d+)', async (req, res, next) => {
     if (req.listening) {
-      const plates: string[] = [];
-      const html = UserCmp(plates);
-    }})
-  .use('/dashboard', (req, res, next) => {
-    if (req.listening) {
-      const html = DashboardCmp([]);
+      const user = await userSrv.findOneFullById(req.params.id);
+      const html = UserDetailCmp(user);
+      sendHtml(html);
     }
+    const cmp = document.querySelector('.user');
+    UserDetailCtrl(cmp);
     next();
   })
   .use('*', (req, res, next) => {

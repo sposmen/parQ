@@ -1,6 +1,6 @@
 import * as express from 'express';
 import * as fetch from 'node-fetch';
-import { userSrv } from '../shared/services/basic.srv';
+import { userSrv } from '../shared/services/user.srv';
 import { QueryMeta, User, ApiResponse } from '../shared/models/generic';
 
 

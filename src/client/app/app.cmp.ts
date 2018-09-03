@@ -1,7 +1,6 @@
 import { inferTitleFromPath } from '../shared/utils/string.util';
 import { APP_TITLE } from '../shared/models/constants';
-import { AppData } from '../shared/models/business';
-import { User } from '../shared/models/generic';
+import { AppData, User } from '../shared/models/generic';
 
 export function AppCmp(data: AppData) {
 
