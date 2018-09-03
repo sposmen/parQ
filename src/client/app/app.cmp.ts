@@ -47,7 +47,7 @@ function AuthCmp(user?: User) {
   if (user) {
     return `
     ${LogoutFormCmp()}
-    <a class="user-link nav__link" href="/user/${user.id}">${user.displayName}</a>
+    <img class="user-image" src="https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/39095630_10155732284182285_712404073608904704_n.jpg?_nc_cat=0&oh=ec17a5ea73f49cd12cf21983c3289cad&oe=5C3081B7"><a class="user-link nav__link" href="/user/${user.id}">${user.displayName}</a>
     `;
   }
 

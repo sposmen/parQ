@@ -14,10 +14,11 @@ export function PlateFormCmp() {
   return `
   <form class="plate-form form">
     <label class="form__label">Plate</label>
+    <input name
     <input name="plate" class="form__control" type="text" placeholder="enter plate, e.g.: abc123"
-           required pattern="[A-Za-z]{3}[0-9]{3}" tootip="enter plate, e.g.: abc123">
+           required pattern="[A-Za-z]{3}[0-9]{3}" maxlength="6" tootip="enter licence plate, e.g.: abc123">
     <div class="actions">
-      <button class="btn btn--primary">Add</button>
+      <button class="btn btn--primary">Save</button>
     </div>
   </form>
   `;
@@ -33,6 +34,6 @@ export function PlateListCmp(plates: Plate[]) {
 
 export function PlateItCmp(plate: Plate) {
   return `
-  <div class="plate-it card-it card-list--sm">${plate.plate}</div>
+  <div class="plate-it card-it card-list--sm"> <p><b>License plate: </b></p>${plate.plate}</div>
   `;
 }
