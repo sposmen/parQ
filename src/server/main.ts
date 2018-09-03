@@ -14,7 +14,7 @@ import { dashboardSrv } from './shared/services/cellAssigns.srv';
 import { LoginCmp } from '../client/login/login.cmp';
 import { DashboardCmp } from '../client/dashboard/dashboard.cmp';
 import { plateApiRouter } from './plate/plate.router';
-import { userApiRouter } from './user/user.router';
+import { userApiRouter, userRouter } from './user/user.router';
 
 const session = buildSession();
 const server = express();
@@ -29,6 +29,7 @@ server
   .post('/logout', logoutRouter)
   .get('/about', aboutRouter)
   .use('/api/facebook', facebookApiRouter)
+  .use('/user', userRouter)
   .use('/api/user', userApiRouter)
   .use('/api/plate', plateApiRouter)
   .get('/api/dashboard', async (req, res, next) => {

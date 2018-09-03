@@ -14,7 +14,8 @@ export function PlateFormCmp() {
   return `
   <form class="plate-form form">
     <label class="form__label">Plate</label>
-    <input name="plate" class="form__control" type="text" placeholder="enter plate, e.g.: abc123" required>
+    <input name="plate" class="form__control" type="text" placeholder="enter plate, e.g.: abc123"
+           required pattern="[A-Za-z]{3}[0-9]{3}" tootip="enter plate, e.g.: abc123">
     <div class="actions">
       <button class="btn btn--primary">Add</button>
     </div>
