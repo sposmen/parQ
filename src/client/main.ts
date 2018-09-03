@@ -14,6 +14,7 @@ import { UserDetailCmp } from './user/userDetail.cmp';
 import { userSrv } from './shared/services/basic.srv';
 import { UserDetailCtrl } from './user/userDetail.ctrl';
 import { dashboardSrv } from './shared/services/dasboard.srv';
+import { DashboardCtrl } from './dashboard/dashboard.ctrl';
 
 router
   .use('/', async (req, res, next) => {
@@ -22,6 +23,8 @@ router
       const html = DashboardCmp(cells);
       sendHtml(html);
     }
+    const cmp = document.querySelector('.dashboard');
+    DashboardCtrl(cmp);
     next();
   })
   .use('/login', (req, res, next) => {

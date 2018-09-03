@@ -96,6 +96,10 @@ export class Plate extends BasicEntity {
   plate?: string;
 }
 
+export class Subscription extends BasicEntity {
+
+}
+
 export interface BasicContractSrv<T extends BasicEntity> {
 
   saveOne(data: T, userId?: number): Promise<number>;
@@ -114,6 +118,7 @@ export interface BasicContractSrv<T extends BasicEntity> {
 export interface UserContractSrv extends BasicContractSrv<User> { }
 
 export interface PlateContractSrv extends BasicContractSrv<Plate> { }
+export interface SubscriptionContractSrv extends BasicContractSrv<Subscription> { }
 
 export interface DashboardSrv {
   findCellAssigns(): Promise<CellAssign[]>;
