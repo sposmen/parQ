@@ -32,3 +32,13 @@ CREATE TABLE Plate (
 );
 
 CREATE UNIQUE INDEX Plate_uk_plate ON Plate (plate);
+
+
+
+CREATE TABLE Subscription (
+  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  createdBy INTEGER NULL,
+  createdAt BIGINT NOT NULL,
+  updatedAt BIGINT NULL,
+  CONSTRAINT Subscription_fk_createdBy FOREIGN KEY (createdBy) REFERENCES User (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
