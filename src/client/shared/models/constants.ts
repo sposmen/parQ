@@ -1,4 +1,4 @@
-export const APP_TITLE = 'App';
+export const APP_TITLE = 'parQ';
 
 class AppLibs {
 
