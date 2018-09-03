@@ -1,9 +1,9 @@
 # hackathon2018
 
-###Run each command below in a separate console:
+### Run the following commands, each one in a separate console:
 
-`npm run server.watch`
+`npm run server.watch` // listen for changes in server code
 
-`npm run client.watch`
+`npm run client.watch` // listen for changes in client code
 
-`npm start`
+`npm start` // start express server
