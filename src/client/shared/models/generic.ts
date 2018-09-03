@@ -151,5 +151,6 @@ export interface AppData {
 export interface CellAssign {
   name?: string;
   plate?: string;
+  model?: string;
   slot?: string;
 }
