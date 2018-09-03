@@ -1,8 +1,15 @@
 import './dashboard.style';
 import { subscriptionSrv } from '../shared/services/basic.srv';
 import { openAlert } from '../shared/utils/modal.util';
+import { authSrv } from '../shared/services/auth.srv';
 
-export function DashboardCtrl(cmp: Element) {
+export async function DashboardCtrl(cmp: Element) {
+
+  const userId = await authSrv.currentUserId();
+
+  if (!userId) {
+    return;
+  }
 
   const subscribeBtn = cmp.querySelector('.subscribe > input') as HTMLInputElement;
 

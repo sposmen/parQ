@@ -15,12 +15,14 @@ import { userSrv } from './shared/services/basic.srv';
 import { UserDetailCtrl } from './user/userDetail.ctrl';
 import { dashboardSrv } from './shared/services/dasboard.srv';
 import { DashboardCtrl } from './dashboard/dashboard.ctrl';
+import { authSrv } from './shared/services/auth.srv';
 
 router
   .use('/', async (req, res, next) => {
     if (req.listening) {
       const cells = await dashboardSrv.findCellAssigns();
-      const html = DashboardCmp(cells);
+      const userId = await authSrv.currentUserId();
+      const html = DashboardCmp(cells, userId);
       sendHtml(html);
     }
     const cmp = document.querySelector('.dashboard');

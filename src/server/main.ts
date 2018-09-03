@@ -99,7 +99,7 @@ async function dashboardRouter(req: express.Request, res: express.Response) {
 
   try {
 
-    const cmp = DashboardCmp(cells);
+    const cmp = DashboardCmp(cells, req.session.userId);
 
     const data: AppData = {
       content: cmp,

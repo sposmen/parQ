@@ -7,7 +7,7 @@ CREATE TABLE User (
   username VARCHAR(255) NOT NULL,
   displayName VARCHAR(300) NOT NULL,
   password VARCHAR(500) NULL,
-  facebookId INTEGER NULL,
+  facebookId BIGINT NULL,
   facebookName VARCHAR(500) NULL,
   facebookShortName VARCHAR(300) NULL,
   facebookPicture VARCHAR(500) NULL,
