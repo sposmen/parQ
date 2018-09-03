@@ -1,6 +1,6 @@
 export function DashboardCmp(assigns: any) {
   return `
-    <div class="about">
+    <div class="dashboard card-list">
       <h1>Dashboard</h1>
       <table>
         <tr>
@@ -16,11 +16,11 @@ export function DashboardCmp(assigns: any) {
 
 function renderAssigns(assigns: any) {
   return assigns.map((assign: any) => {
-      return `<tr>
-      <th>${assign.name}</th>
-      <th>${assign.plate}</th>
-      <th>${assign.slot}</th>
-      </tr> `
-    }
-  ).join('\n')
+    return `<tr class="card-it">
+      <td>${assign.name}</td>
+      <td>${assign.plate}</td>
+      <td>${assign.slot < 9 ? '0' + assign.slot : assign.slot}</td>
+      </tr>`;
+  }
+  ).join('\n');
 }
