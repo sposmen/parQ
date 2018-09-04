@@ -4,10 +4,10 @@ import { QueryUpdateResult, BasicEntity, QueryMeta } from '../models/generic';
 import { buildQueryOne, buildQuery } from './sql.util';
 
 export const pool = mysql.createPool({
-  host: '142.93.115.181',
-  user: 'rpc',
-  password: 'Leo2006!',
-  database: 'app'
+  host: 'someIp',
+  user: 'someUser',
+  password: 'somePass',
+  database: 'someDb'
 });
 
 pool.on('connection', (connection: { threadId: string }) => {
