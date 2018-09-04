@@ -40,10 +40,30 @@ function cellAssignsCmp(assigns: CellAssign[], user?: User) {
           <p><b>Car models: </b>${assign.models.join(', ')}</p>
           <p><b>Assigned cell: </b>${assign.slot < 9 ? '0' + assign.slot : assign.slot}</p>
         </div>
-        <div class="dashboard-card-right">
-          <button class="btn">Release</button>
-        </div>
+        ${releaseBtn(assign, user)}
       </div>`;
+  }).join('');
+}
+
+function releaseBtn(assign: CellAssign, user?: User) {
+
+  if (!user) {
+    return '';
   }
-  ).join('');
+
+  const found = assign.plates.some(plate => {
+    return user.plates.some(userPlate => {
+      return plate === userPlate.plate;
+    });
+  });
+
+  if (!found) {
+    return '';
+  }
+
+  return `
+  <div class="dashboard-card-right">
+    <button class="btn">Release</button>
+  </div>
+  `;
 }
