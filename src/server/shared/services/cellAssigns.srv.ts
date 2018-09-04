@@ -27,18 +27,9 @@ export const dashboardSrv: DashboardSrv = {
   }
 }
 
-// function sanitizePlatesFormat(data: CellAssign[]) {
-
-//   if (!data || data.length === 0) {
-//     return data;
-//   }
-
-//   const resp = data.map(it => {
-//     it.
-//   });
-
-//   return resp;
-// }
+function formatPlate(plate: string) {
+  return plate.replace(/\s+|\-/g, '').toUpperCase();
+}
 
 
 /**
@@ -86,7 +77,7 @@ function listPlates(auth: any, cb: any) {
       rows.forEach((row: any) => {
         if (!row[3] && deDuplicator.hasOwnProperty(lastCell)) {
           const cellAssign: CellAssign = deDuplicator[lastCell];
-          cellAssign.plates.push(row[1]);
+          cellAssign.plates.push(formatPlate(row[1]));
           cellAssign.models.push(row[2]);
         } else if (row[3]) {
           lastCell = row[3];
@@ -94,7 +85,7 @@ function listPlates(auth: any, cb: any) {
           cellAssign.plates = [];
           cellAssign.models = [];
           cellAssign.name = row[0];
-          cellAssign.plates.push(row[1]);
+          cellAssign.plates.push(formatPlate(row[1]));
           cellAssign.models.push(row[2]);
           cellAssign.slot = row[3];
           deDuplicator[row[3]] = cellAssign;
