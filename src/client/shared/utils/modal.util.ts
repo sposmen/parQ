@@ -55,7 +55,7 @@ export function openModal(content: string, options: ModalOptions = {}) {
   return modalEl;
 }
 
-export function confirmAction(message: string) {
+export function confirmAction(message: string, options?: ModalOptions) {
   return new Promise((resolve, reject) => {
 
     const content = `
@@ -65,7 +65,7 @@ export function confirmAction(message: string) {
       </div>
     `;
 
-    const modalEl = openModal(content);
+    const modalEl = openModal(content, options);
 
     modalEl.querySelector('.confirm-action__ok').addEventListener('click', () => {
       resolve(true);

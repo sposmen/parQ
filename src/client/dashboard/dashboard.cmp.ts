@@ -63,7 +63,7 @@ function releaseBtn(assign: CellAssign, user?: User) {
 
   return `
   <div class="dashboard-card-right">
-    <button class="btn">Release</button>
+    <button class="release-cell btn">Release</button>
   </div>
   `;
 }

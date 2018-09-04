@@ -1,6 +1,6 @@
 import './dashboard.style';
 import { subscriptionSrv } from '../shared/services/basic.srv';
-import { openAlert } from '../shared/utils/modal.util';
+import { openAlert, openModal, confirmAction } from '../shared/utils/modal.util';
 import { authSrv } from '../shared/services/auth.srv';
 
 export async function DashboardCtrl(cmp: Element) {
@@ -28,4 +28,12 @@ export async function DashboardCtrl(cmp: Element) {
       openAlert('Unsubscribed', { type: 'warning' });
     }
   };
+
+  cmp.addEventListener('click', evt => {
+    const target = evt.target as Element;
+    if (!target.classList.contains('release-cell')) {
+      return;
+    }
+    confirmAction('Are you sure of releasing the cell?');
+  });
 }
