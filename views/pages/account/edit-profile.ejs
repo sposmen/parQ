@@ -20,16 +20,6 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-12">
-          <a class="btn btn-outline-info" @click="addPlateButton()">Add Plate</a>
-          <div class="row" v-for="(item, idx) in formData.plates">
-            <div class="col-sm-6">
-              <input class="form-control" name="plates[]" type="text"  v-model="item.plate">
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
         <div class="col-sm-6">
           <p class="text-danger" v-if="cloudError === 'emailAlreadyInUse'">There is already an account using that email address.</p>
           <p class="text-danger" v-else-if="cloudError">An error occured while processing your request. Please check your information and try again, or <a href="/contact">contact support</a> if the error persists.</p>

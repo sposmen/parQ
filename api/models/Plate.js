@@ -16,7 +16,8 @@ module.exports = {
     plate: {
       type: 'string',
       required: true,
-      regex: /^[A-Za-z]{3}[0-9]{3}$/
+      regex: /^[A-Za-z]{3}[0-9]{3}$/,
+      unique:true
     },
 
 
