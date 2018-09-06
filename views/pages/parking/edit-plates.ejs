@@ -3,6 +3,7 @@
   <div class="container">
     <h1>Plates</h1>
     <hr/>
+
     <ajax-form action="addPlate" :syncing.sync="syncing" :cloud-error.sync="cloudError" @submitted="submittedForm()" :handle-parsing="handleParsingForm">
 
       <div class="row">

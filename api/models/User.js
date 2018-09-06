@@ -166,6 +166,10 @@ email status until they click the link in the confirmation email.`
     plates: {
       collection: 'plate',
       via: 'owner'
+    },
+    subscriptions: {
+      collection: 'subscription',
+      via: 'owner'
     }
 
   },
