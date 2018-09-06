@@ -13,13 +13,10 @@ module.exports = {
 
   fn: async function (inputs, exits) {
 
-    const monthNames = ["January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November", "December"
-    ];
+    let startingDay = moment(1, 'DD').startOf('week');
+    const endingDate = moment(1, 'DD').endOf('month').endOf('week')
 
-    const d = new Date();
-
-    return exits.success({monthName: monthNames[d.getMonth()], testing:"Hello World"});
+    return exits.success({monthName: moment().format('MMMM'), startingDay: startingDay, endingDate: endingDate});
 
   }
 

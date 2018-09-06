@@ -1,26 +1,25 @@
-<div id="edit-subscriptions" v-cloak>
+<div id="edit-subscriptions">
 
   <div class="container">
     <div class="row">
-      <div class="col-md-5">{{monthName}}</div>
-    </div>
-    <div class="row">
-      <div class="col-md-1">Mon</div>
-      <div class="col-md-1">Tus</div>
-      <div class="col-md-1">Wed</div>
-      <div class="col-md-1">Thu</div>
-      <div class="col-md-1">Fri</div>
-    </div>
-
-    <% dates.forEach( (date)=> { %>
-      <div class="row">
-        <div class="col-md-1">Mon</div>
-        <div class="col-md-1">Tus</div>
-        <div class="col-md-1">Wed</div>
-        <div class="col-md-1">Thu</div>
-        <div class="col-md-1">Fri</div>
+      <div class="col-md-12 text-md-center">
+        <div class="row">
+          <div class="col-md-7 text-md-center"><h3><%= monthName %></h3></div>
+        </div>
+        <div class="row">
+          <% for (let day = 0; day < 7; day++) { %>
+            <div class="col-md-1"><h4><%= startingDay.day(day).format('ddd') %></h4></div>
+          <% } %>
+        </div>
+        <% while (startingDay.isBefore(endingDate)) { %>
+          <div class="row">
+            <% for (let day = 0; day < 7; day++) { %>
+              <div class="col-md-1"><%= startingDay.day(day).format('D') %></div>
+            <% } %>
+          </div>
+        <% startingDay.add(7, 'day'); } %>
       </div>
-    <% } ); %>
+    </div>
 
   </div>
 </div>
