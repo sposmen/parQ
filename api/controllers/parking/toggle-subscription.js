@@ -9,27 +9,30 @@ module.exports = {
 
   inputs: {
 
-    toggle: {
-      type: 'string'
+    date: {
+      type: 'string',
+      required: true
     },
 
   },
 
 
-  exits: {},
+  exits: {
+
+  },
 
 
   fn: async function (inputs, exits) {
 
-    const objToCheck = {owner: this.req.me.id};
+    const objToCheck = {owner: this.req.me.id, date: inputs.date};
 
-    if(inputs.toggle){
-      if( await Subscription.count(objToCheck) ){
-        await Subscription.destroy(objToCheck)
-      } else {
-        await Subscription.create(objToCheck)
-      }
+
+    if( await Subscription.count(objToCheck) ){
+      await Subscription.destroy(objToCheck)
+    } else {
+      await Subscription.create(objToCheck)
     }
+
 
     return exits.success();
 

@@ -11,21 +11,28 @@
 
 parasails.registerComponent('toggleSubscription', {
 
+  props: [
+    'date',
+    'day'
+  ],
+
+  data: function () {
+    return {
+      //…
+    };
+  },
+
   template: `
-  <div class="toggle-subscription">
-    <div class="form-group">
-      <span class="switch">
-        <input type="checkbox" class="switch" id="switch-normal" name="toggle" @click="click()">
-        <label for="switch-normal">Subscribe for next round</label>
-      </span>
-    </div>
+  <div class="col-md-1">
+    <button @click="click()" type="button" class="btn btn-success">{{day}}</button>
   </div>
   `,
-
+  beforeMount: function() {
+    console.log(this.date)
+  },
   methods: {
-    click: async function(){
-      let result = await Cloud['toggleSubscription'].with({toggle:true})
-      console.log(result)
+    click: async function () {
+      let result = await Cloud['toggleSubscription'].with({date: this.date});
     },
 
   }

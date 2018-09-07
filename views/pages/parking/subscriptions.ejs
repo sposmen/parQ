@@ -1,4 +1,4 @@
-<div id="edit-subscriptions">
+<div id="subscriptions">
 
   <div class="container">
     <div class="row">
@@ -8,13 +8,16 @@
         </div>
         <div class="row">
           <% for (let day = 0; day < 7; day++) { %>
-            <div class="col-md-1"><h4><%= startingDay.day(day).format('ddd') %></h4></div>
+            <div class="col-md-1"><h4 class="text-monospace"><%= startingDay.day(day).format('ddd') %></h4></div>
           <% } %>
         </div>
         <% while (startingDay.isBefore(endingDate)) { %>
           <div class="row">
             <% for (let day = 0; day < 7; day++) { %>
-              <div class="col-md-1"><%= startingDay.day(day).format('D') %></div>
+              <toggle-subscription
+                :date="'<%= startingDay.day(day).format('YYYY-MM-DD') %>'"
+                :day="'<%= startingDay.day(day).format('DD') %>'">
+              </toggle-subscription>
             <% } %>
           </div>
         <% startingDay.add(7, 'day'); } %>
@@ -23,3 +26,4 @@
 
   </div>
 </div>
+<%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>
