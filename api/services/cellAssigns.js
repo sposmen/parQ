@@ -16,18 +16,18 @@ module.exports = () => {
         "redirect_uris": ["urn:ietf:wg:oauth:2.0:oob", "http://localhost"]
       }
     }, (auth) => {
-      listPlates(auth, (data = []) => {
+      listPlates(auth, (err, data = []) => {
+        if (err) return reject(err);
         resolve(data);
       });
     });
   });
-}
+};
 
 
 function formatPlate (plate) {
   return plate.replace(/\s+|\-/g, '').toUpperCase();
 }
-
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -56,16 +56,19 @@ function authorize (credentials, callback) {
  * @param {google.auth.OAuth2} auth The authenticated Google OAuth client.
  */
 
-function listPlates (auth, cb) {
+async function listPlates (auth, cb) {
   const sheets = google.sheets({version: 'v4', auth});
 
   let lastCell = '';
 
-  sheets.spreadsheets.values.get({
-    spreadsheetId: '1zNG4LXOamD0EXMiWphuMlXzcaCJSP0enRBBcFTCYeeI',
-    range: 'Septiembre 2018!A3:D27',
-  }, (err, res) => {
-    if (err) return console.log('The API returned an error: ' + err);
+  const spreadsheet = await Config.findOne({key:'Spreed Sheet Assignment'});
+
+  if(!spreadsheet) {
+    return cb ('No "Spreed Sheet Assignment" config set.')
+  }
+
+  sheets.spreadsheets.values.get(spreadsheet.value, (err, res) => {
+    if (err) return cb('The API returned an error: ' + err);
     const rows = res.data.values;
     if (rows.length) {
       const deDuplicator = {};
@@ -77,20 +80,18 @@ function listPlates (auth, cb) {
           cellAssign.models.push(row[2]);
         } else if (row[3]) {
           lastCell = row[3];
-          const cellAssign = {};
-          cellAssign.plates = [];
-          cellAssign.models = [];
-          cellAssign.name = row[0];
-          cellAssign.plates.push(formatPlate(row[1]));
-          cellAssign.models.push(row[2]);
-          cellAssign.slot = row[3];
-          deDuplicator[row[3]] = cellAssign;
+          deDuplicator[row[3]] = {
+            plates: [formatPlate(row[1])],
+            models: [row[2]],
+            name: row[0],
+            slot: row[3]
+          };
           finalData.push(deDuplicator[row[3]])
         }
       });
-      cb(finalData)
+      cb(null, finalData)
     } else {
-      cb([]);
+      cb(null, []);
     }
   });
 }
