@@ -1,29 +1,27 @@
 <div id="subscriptions">
-
   <div class="container">
-    <div class="row">
-      <div class="col-md-12 text-md-center">
-        <div class="row">
-          <div class="col-md-7 text-md-center"><h3><%= monthName %></h3></div>
-        </div>
-        <div class="row">
+    <table class="table table-striped table-bordered table-condensed">
+      <tr>
+        <th colspan="7" class="text-center"><h3><%= monthName %></h3></th>
+      </tr>
+      <tr>
+        <% for (let day = 0; day < 7; day++) { %>
+          <th class="text-center"><h4 class="text-monospace"><%= startingDay.day(day).format('ddd') %></h4></th>
+        <% } %>
+      </tr>
+      <% while (startingDay.isBefore(endingDate)) { %>
+        <tr>
           <% for (let day = 0; day < 7; day++) { %>
-            <div class="col-md-1"><h4 class="text-monospace"><%= startingDay.day(day).format('ddd') %></h4></div>
-          <% } %>
-        </div>
-        <% while (startingDay.isBefore(endingDate)) { %>
-          <div class="row">
-            <% for (let day = 0; day < 7; day++) { %>
+            <td class="text-center">
               <toggle-subscription
                 :date="'<%= startingDay.day(day).format('YYYY-MM-DD') %>'"
                 :day="'<%= startingDay.day(day).format('DD') %>'">
               </toggle-subscription>
-            <% } %>
-          </div>
-        <% startingDay.add(7, 'day'); } %>
-      </div>
-    </div>
-
+            </td>
+          <% } %>
+        </tr>
+      <% startingDay.add(7, 'day'); } %>
+    </table>
   </div>
 </div>
 <%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>

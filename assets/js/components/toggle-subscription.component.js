@@ -23,11 +23,9 @@ parasails.registerComponent('toggleSubscription', {
   },
 
   template: `
-  <div class="col-md-1">
     <button @click="click()" type="button" class="btn btn-success">{{day}}</button>
-  </div>
   `,
-  beforeMount: function() {
+  beforeMount: function () {
     console.log(this.date)
   },
   methods: {
