@@ -1,0 +1,15 @@
+<div id="subscriptions">
+  <div class="container">
+    <% cellAssigns.forEach((cellAssign) => { %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"><%= cellAssign.name %></h3>
+        </div>
+        <div class="panel-body">
+          <%= cellAssign.plates.join(', ') %>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</div>
+<%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>

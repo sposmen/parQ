@@ -58,5 +58,9 @@ parasails.registerPage('edit-plates', {
       return argins;
     },
 
+    handleEditPlates: async function (argins){
+      await Cloud.addPlate.with(argins).protocol(io.socket);
+    }
+
   }
 });

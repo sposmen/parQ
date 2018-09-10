@@ -4,7 +4,7 @@
     <h1>Plates</h1>
     <hr/>
 
-    <ajax-form action="addPlate" :syncing.sync="syncing" :cloud-error.sync="cloudError" @submitted="submittedForm()" :handle-parsing="handleParsingForm">
+    <ajax-form :syncing.sync="syncing" :cloud-error.sync="cloudError" @submitted="submittedForm()" :handle-parsing="handleParsingForm" :handle-submitting="handleEditPlates">
 
       <div class="row">
         <div class="col-sm-6">

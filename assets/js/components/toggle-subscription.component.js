@@ -25,12 +25,9 @@ parasails.registerComponent('toggleSubscription', {
   template: `
     <button @click="click()" type="button" class="btn btn-success">{{day}}</button>
   `,
-  beforeMount: function () {
-    console.log(this.date)
-  },
   methods: {
     click: async function () {
-      let result = await Cloud['toggleSubscription'].with({date: this.date});
+      let result = await Cloud.toggleSubscription.with({date: this.date}).protocol(io.socket);
     },
 
   }
