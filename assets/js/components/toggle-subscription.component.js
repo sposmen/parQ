@@ -27,7 +27,7 @@ parasails.registerComponent('toggleSubscription', {
   `,
   methods: {
     click: async function () {
-      let result = await Cloud.toggleSubscription.with({date: this.date}).protocol(io.socket);
+      let result = await Cloud.toggleSubscription.with({date: this.date});
     },
 
   }

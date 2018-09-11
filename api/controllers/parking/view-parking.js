@@ -13,8 +13,14 @@ module.exports = {
 
   fn: async function (inputs, exits) {
 
-    const currentCellAssigns = await cellAssigns();
+    let currentCellAssigns = await CurrentCellsAssign.find();
 
+    if(currentCellAssigns.length === 0){
+      currentCellAssigns = await cellAssigns();
+      if(currentCellAssigns.length !== 0){
+        await CurrentCellsAssign.createEach(currentCellAssigns)
+       }
+    }
     return exits.success({cellAssigns: currentCellAssigns});
 
   }

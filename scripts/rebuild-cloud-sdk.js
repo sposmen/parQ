@@ -6,14 +6,14 @@ module.exports = {
   description: 'Regenerate the configuration for the "Cloud SDK" -- the JavaScript module used for AJAX and WebSockets.',
 
 
-  fn: async function(inputs, exits){
+  fn: async function (inputs, exits) {
 
     var path = require('path');
 
     var endpointsByMethodName = {};
     var extraEndpointsOnlyForTestsByMethodName = {};
 
-    _.each(sails.config.routes, (target)=>{
+    _.each(sails.config.routes, (target) => {
 
       // If the route target is an array, then only consider
       // the very last sub-target in the array.
@@ -45,14 +45,14 @@ module.exports = {
       // (but still generate them for use in tests, for convenience)
       if (target.view || (bareActionName.match(/^view-/))) {
         extraEndpointsOnlyForTestsByMethodName[methodName] = {
-          verb: (expandedAddress.method||'get').toUpperCase(),
+          verb: (expandedAddress.method || 'get').toUpperCase(),
           url: expandedAddress.url
         };
         return;
       }//•
 
       endpointsByMethodName[methodName] = {
-        verb: (expandedAddress.method||'get').toUpperCase(),
+        verb: (expandedAddress.method || 'get').toUpperCase(),
         url: expandedAddress.url,
       };
 
@@ -62,7 +62,7 @@ module.exports = {
       // > method for this one.
       var requestable = sails.getActions()[target.action];
       if (!requestable) {
-        sails.log.warn('Skipping unrecognized action: `'+target.action+'`');
+        sails.log.warn('Skipping unrecognized action: `' + target.action + '`');
         return;
       }
       var def = requestable.toJSON && requestable.toJSON();
@@ -70,7 +70,7 @@ module.exports = {
         if (def.args !== undefined) {
           endpointsByMethodName[methodName].args = def.args;
         } else {
-          endpointsByMethodName[methodName].args = _.reduce(def.inputs, (args, inputDef, inputCodeName)=>{
+          endpointsByMethodName[methodName].args = _.reduce(def.inputs, (args, inputDef, inputCodeName) => {
             args.push(inputCodeName);
             return args;
           }, []);
@@ -85,8 +85,20 @@ module.exports = {
 
     });//∞
 
+    /*EXTRA ENDPOINTS LIKE BLUEPRINTS*/
+
+    _.merge(endpointsByMethodName, {
+        "userPlates": {
+          "verb": "GET",
+          "url": "/user/:user_id/plates",
+          "args": ["user_id"],
+          "protocol": "io.socket"
+        }
+      }
+    );
+
     var jsCode =
-`/**
+      `/**
  * cloud.setup.js
  *
  * Configuration for this Sails app's generated browser SDK ("Cloud").
@@ -94,15 +106,15 @@ module.exports = {
  * Above all, the purpose of this file is to provide endpoint definitions,
  * each of which corresponds with one particular route+action on the server.
  *
- `+//* > This file was automatically generated. `+new Date()+`
- `* > This file was automatically generated.
+ ` +//* > This file was automatically generated. `+new Date()+`
+      `* > This file was automatically generated.
  * > (To regenerate, run \`sails run rebuild-cloud-sdk\`)
  */
 
 Cloud.setup({
 
   /* eslint-disable */
-  methods: `+JSON.stringify(endpointsByMethodName)+`
+  methods: ` + JSON.stringify(endpointsByMethodName) + `
   /* eslint-enable */
 
 });\n`;

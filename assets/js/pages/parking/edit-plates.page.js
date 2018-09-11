@@ -25,7 +25,7 @@ parasails.registerPage('edit-plates', {
   beforeMount: async function() {
     _.extend(this, SAILS_LOCALS);
     // Set the form data.
-    this.plates = await $.get(`/user/${this.me.id}/plates`);
+    this.plates = await Cloud.userPlates.with({user_id: this.me.id});
   },
   mounted: async function() {
     //…
@@ -37,7 +37,7 @@ parasails.registerPage('edit-plates', {
   methods: {
 
     submittedForm: async function() {
-      this.plates = await $.get(`/user/${this.me.id}/plates`);
+      this.plates = await Cloud.userPlates.with({user_id: this.me.id});
     },
 
     handleParsingForm: function() {
@@ -56,10 +56,6 @@ parasails.registerPage('edit-plates', {
       }
 
       return argins;
-    },
-
-    handleEditPlates: async function (argins){
-      await Cloud.addPlate.with(argins).protocol(io.socket);
     }
 
   }
