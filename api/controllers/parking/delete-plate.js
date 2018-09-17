@@ -9,7 +9,7 @@ module.exports = {
 
   inputs: {
 
-    plate: {
+    id: {
       type: 'string'
     },
 
@@ -22,7 +22,7 @@ module.exports = {
   fn: async function (inputs, exits) {
 
     var valuesToHandle = {
-      plate: inputs.plate,
+      id: inputs.id,
       owner: this.req.me.id
     };
 

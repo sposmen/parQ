@@ -30,7 +30,7 @@
         <div class="row" v-for="item in plates">
           <div class="col-sm-12">
             {{item.plate}}
-            <button type="button" class="close" @click="deletePlate(item.plate)" aria-label="Close">
+            <button type="button" class="close" @click="deletePlate(item.id)" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
