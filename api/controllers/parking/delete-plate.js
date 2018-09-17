@@ -1,10 +1,10 @@
 module.exports = {
 
 
-  friendlyName: 'Add Plate',
+  friendlyName: 'Delete Plate',
 
 
-  description: 'Adds a plate to the logged user.',
+  description: 'Deletes a plate from the logged user.',
 
 
   inputs: {
@@ -21,12 +21,12 @@ module.exports = {
 
   fn: async function (inputs, exits) {
 
-    var valuesToSet = {
+    var valuesToHandle = {
       plate: inputs.plate,
       owner: this.req.me.id
     };
 
-    await Plate.create(valuesToSet);
+    await Plate.destroy(valuesToHandle);
 
     return exits.success();
 

@@ -56,6 +56,11 @@ parasails.registerPage('edit-plates', {
       }
 
       return argins;
+    },
+
+    deletePlate: async function(plate){
+      await Cloud.deletePlate.with({plate: plate});
+      this.plates = await Cloud.userPlates.with({user_id: this.me.id});
     }
 
   }

@@ -14,7 +14,7 @@ module.exports = {
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
     cell: 'string',
 
-    releaseDate: {
+    date: {
       type: 'ref',
       columnType: 'date'
     },
