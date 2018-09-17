@@ -11,11 +11,14 @@
       </tr>
       <% while (startingDay.isBefore(endingDate)) { %>
         <tr>
-          <% for (let day = 0; day < 7; day++) { %>
+          <% for (let day = 0; day < 7; day++) {
+            let dateText = startingDay.day(day).format('YYYY-MM-DD');
+          %>
             <td class="text-center">
               <toggle-subscription
-                :date="'<%= startingDay.day(day).format('YYYY-MM-DD') %>'"
-                :day="'<%= startingDay.day(day).format('DD') %>'">
+                :date="'<%= dateText %>'"
+                :day="'<%= startingDay.day(day).format('DD') %>'"
+                :subsclass="'<%= subscriptionClass[dateText] || 'btn-danger' %>'">
               </toggle-subscription>
             </td>
           <% } %>

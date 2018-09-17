@@ -13,13 +13,31 @@ module.exports = {
 
   fn: async function (inputs, exits) {
 
-    let startingDay = moment(1, 'DD').startOf('week');
+    let startingDay = moment(1, 'DD').startOf('month').startOf('week');
     const endingDate = moment(1, 'DD').endOf('month').endOf('week');
 
+    const subscriptions = await Subscription.find({date: {'>=': startingDay.format(), '<=': endingDate.format()}});
 
-    console.log(await Subscription.find({ date: { '>': '2018-09-15' }}));
+    let subscriptionClass = {}
 
-    return exits.success({monthName: moment().format('MMMM'), startingDay: startingDay, endingDate: endingDate});
+    subscriptions.forEach((subscription)=>{
+      subscriptionClass[subscription.date] = 'btn-info'
+    });
+
+    let subscriptionAssign = await ReleaseCell.find({
+      assigned: this.req.me.id,
+      assignAccepted: true,
+      date: {
+        '>=': startingDay.format(),
+        '<=': endingDate.format()
+      }
+    });
+
+    subscriptionAssign.forEach((subscription)=>{
+      subscriptionClass[subscription.date] = 'btn-success'
+    });
+
+    return exits.success({monthName: moment().format('MMMM'), startingDay: startingDay, endingDate: endingDate, subscriptionClass: subscriptionClass});
 
   }
 

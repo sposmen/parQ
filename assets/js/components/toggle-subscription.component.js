@@ -13,7 +13,8 @@ parasails.registerComponent('toggleSubscription', {
 
   props: [
     'date',
-    'day'
+    'day',
+    'subsclass'
   ],
 
   data: function () {
@@ -23,11 +24,12 @@ parasails.registerComponent('toggleSubscription', {
   },
 
   template: `
-    <button @click="click()" type="button" class="btn btn-success">{{day}}</button>
+    <button @click="click()" type="button" class="btn" v-bind:class="[subsclass]">{{day}}</button>
   `,
   methods: {
     click: async function () {
-      let result = await Cloud.toggleSubscription.with({date: this.date});
+      await Cloud.toggleSubscription.with({date: this.date});
+      window.location = '/parking/subscriptions';
     },
 
   }

@@ -19,17 +19,20 @@ module.exports = {
       columnType: 'date'
     },
 
-    //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
-    //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
-    //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
+    assignAccepted: 'boolean',
 
+    assignAcceptExpire: {
+      type: 'ref',
+      columnType: 'datetime'
+    },
 
-    //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
-    //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
-    //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
     owner: {
       model: 'user'
-    }
+    },
+
+    assigned: {
+      model: 'user'
+    },
 
   },
 
