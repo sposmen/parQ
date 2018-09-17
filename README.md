@@ -1,3 +1,19 @@
+# Parking selection app
+
+## Requirements
+
+- NodeJS >= 6.*
+- MongoDB
+
+## Setup
+
+1. Install sails as global `npm install sails -g`
+2. Clone this repo
+3. Install dependencies `cd <THIS_REPO> && npm install` 
+4. Start mongodb `mongo/start.sh` (If required change the port in `mongo\mongod.conf` and config in `config\datastores.js`)
+5. Start sails `sails lift`
+
+
 # code
 
 a [Sails v1](https://sailsjs.com) application
