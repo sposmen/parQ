@@ -163,8 +163,8 @@ email status until they click the link in the confirmation email.`
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
     // n/a
-    plates: {
-      collection: 'plate',
+    vehicles: {
+      collection: 'vehicle',
       via: 'owner'
     },
     subscriptions: {

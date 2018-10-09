@@ -12,16 +12,16 @@ module.exports = {
 
 
   fn: async function (inputs, exits) {
-
+    let monthData = [];
     let startingDay = moment(1, 'DD').startOf('month').startOf('week');
-    const endingDate = moment(1, 'DD').endOf('month').endOf('week');
+    let endingDate = moment(1, 'DD').endOf('month').endOf('week');
 
     const subscriptions = await Subscription.find({date: {'>=': startingDay.format(), '<=': endingDate.format()}});
 
-    let subscriptionClass = {}
+    let subscriptionClass = {};
 
     subscriptions.forEach((subscription)=>{
-      subscriptionClass[subscription.date] = 'btn-info'
+      subscriptionClass[subscription.date] = 'btn-info';
     });
 
     let subscriptionAssign = await ReleaseCell.find({
@@ -34,8 +34,30 @@ module.exports = {
     });
 
     subscriptionAssign.forEach((subscription)=>{
-      subscriptionClass[subscription.date] = 'btn-success'
+      subscriptionClass[subscription.date] = 'btn-success';
     });
+
+    while (startingDay.isBefore(endingDate)) {
+      let weekData = [];
+      for (let day = 0; day < 7; day++) {
+        let dayData = {
+          day: startingDay.day(day).format('DD'),
+          dateText: startingDay.day(day).format('YYYY-MM-DD'),
+          class: 'btn-danger'
+        };
+        if(subscriptionClass.hasOwnProperty(dayData.dateText)){
+          dayData.class = subscriptionClass[dayData.dateText];
+        }
+        weekData.push(dayData);
+      }
+      monthData.push(weekData);
+      startingDay.add(7, 'day');
+    }
+
+    console.log(monthData);
+
+    startingDay = moment(1, 'DD').startOf('month').startOf('week');
+    endingDate = moment(1, 'DD').endOf('month').endOf('week');
 
     return exits.success({monthName: moment().format('MMMM'), startingDay: startingDay, endingDate: endingDate, subscriptionClass: subscriptionClass});
 

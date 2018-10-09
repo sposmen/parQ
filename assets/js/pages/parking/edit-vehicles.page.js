@@ -25,7 +25,7 @@ parasails.registerPage('edit-plates', {
   beforeMount: async function() {
     _.extend(this, SAILS_LOCALS);
     // Set the form data.
-    this.plates = await Cloud.userPlates.with({user_id: this.me.id});
+    this.plates = await Cloud.userVehicles.with({user_id: this.me.id});
   },
   mounted: async function() {
     //…
@@ -37,7 +37,7 @@ parasails.registerPage('edit-plates', {
   methods: {
 
     submittedForm: async function() {
-      this.plates = await Cloud.userPlates.with({user_id: this.me.id});
+      this.plates = await Cloud.userVehicles.with({user_id: this.me.id});
     },
 
     handleParsingForm: function() {
@@ -47,7 +47,7 @@ parasails.registerPage('edit-plates', {
       var argins = this.formData;
 
       // Validate name:
-      if(!argins.plate || !argins.plate.match(/^[a-zA-Z]{3}[0-9]{3}$/)) {
+      if(!argins.plate || !argins.plate.match(/^[A-Z]{3}([0-9]{3}|[0-9]{2}[A-Z])$/)) {
         this.formErrors.plate = true;
       }
 
@@ -58,9 +58,12 @@ parasails.registerPage('edit-plates', {
       return argins;
     },
 
-    deletePlate: async function(id){
-      await Cloud.deletePlate.with({id: id});
-      this.plates = await Cloud.userPlates.with({user_id: this.me.id});
+    deleteVehicle: async function(item){
+      if(confirm(`Are you sure want to delete ${item.plate} ?`)){
+
+        await Cloud.deleteVehicle.with({id: item.id});
+        this.plates = await Cloud.userVehicles.with({user_id: this.me.id});
+      }
     }
 
   }

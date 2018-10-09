@@ -1,0 +1,67 @@
+<div id="edit-plates" v-cloak>
+
+  <div class="container">
+    <h1>Vehicles</h1>
+    <hr/>
+
+    <ajax-form action="addVehicle" :syncing.sync="syncing" :cloud-error.sync="cloudError" @submitted="submittedForm()"
+               :handle-parsing="handleParsingForm">
+
+
+      <div class="form-group">
+        <label for="type">Type</label>
+        <select class="form-control" id="type" name="type"
+                :class="[formErrors.type ? 'is-invalid' : '']" v-model="formData.type"
+                focus-first>
+          <option selected="selected">Car</option>
+          <option>Motorcycle</option>
+        </select>
+        <div class="invalid-feedback" v-if="formErrors.plate">Please enter a plate.</div>
+      </div>
+      <div class="form-group">
+        <label for="plate">Plate</label>
+        <input class="form-control" id="plate" name="plate" type="text"
+               :class="[formErrors.plate ? 'is-invalid' : '']" v-model="formData.plate" placeholder="ABC123"
+        >
+        <div class="invalid-feedback" v-if="formErrors.plate">Please enter a plate.</div>
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input class="form-control" id="description" name="description" type="text"
+               :class="[formErrors.description ? 'is-invalid' : '']" v-model="formData.description"
+               placeholder="Enter a Description"
+        >
+        <div class="invalid-feedback" v-if="formErrors.plate">Please enter a plate.</div>
+      </div>
+
+      <button type="submit" :syncing="syncing" class="btn btn-dark">Add Vehicle</button>
+
+    </ajax-form>
+    <br>
+    <div class="row">
+      <div class="col-sm-12">
+        <table class="table table-striped">
+          <tr>
+            <th>Plate</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Delete</th>
+          </tr>
+          <tr v-for="item in plates">
+            <td>{{item.plate}}</td>
+            <td>{{item.type}}</td>
+            <td>{{item.description}}</td>
+            <td class="text-center">
+              <button type="button" class="close" @click="deleteVehicle(item)" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </td>
+          </tr>
+        </table>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+<%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>

@@ -1,15 +1,15 @@
 module.exports = {
 
 
-  friendlyName: 'Add Plate',
+  friendlyName: 'Delete Vehicle',
 
 
-  description: 'Adds a plate to the logged user.',
+  description: 'Deletes a vehicle from the logged user.',
 
 
   inputs: {
 
-    plate: {
+    id: {
       type: 'string'
     },
 
@@ -21,12 +21,12 @@ module.exports = {
 
   fn: async function (inputs, exits) {
 
-    var valuesToSet = {
-      plate: inputs.plate,
+    var valuesToHandle = {
+      id: inputs.id,
       owner: this.req.me.id
     };
 
-    await Plate.create(valuesToSet);
+    await Vehicle.destroy(valuesToHandle);
 
     return exits.success();
 

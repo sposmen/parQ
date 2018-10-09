@@ -12,5 +12,5 @@ module.exports = (extraExits = {}) => {
         description: 'Requesting user is logged in, so redirect to the internal welcome page.'
       },
     }
-    , extraExits)
+    , extraExits);
 };

@@ -121,6 +121,7 @@ node_modules
 .netbeans
 nbproject
 .idea
+.vscode
 .node_history
 dump.rdb
 

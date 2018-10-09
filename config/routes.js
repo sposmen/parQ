@@ -34,7 +34,7 @@ module.exports.routes = {
   'GET /account/password':          { action: 'account/view-edit-password' },
   'GET /account/profile':           { action: 'account/view-edit-profile' },
   'GET /parking':                   { action: 'parking/view-parking' },
-  'GET /parking/plates':            { view:   'pages/parking/edit-plates' },
+  'GET /parking/vehicles':          { view:   'pages/parking/edit-vehicles' },
   'GET /parking/subscriptions':     { action: 'parking/view-subscriptions' },
 
 
@@ -52,8 +52,8 @@ module.exports.routes = {
   'POST    /api/v1/entrance/send-password-recovery-email': { action: 'entrance/send-password-recovery-email' },
   'POST    /api/v1/entrance/update-password-and-login':    { action: 'entrance/update-password-and-login' },
   'POST    /api/v1/deliver-contact-form-message':          { action: 'deliver-contact-form-message' },
-  'POST    /api/v1/parking/add-plate':                     { action: 'parking/add-plate', isSocket: true },
-  'DELETE  /api/v1/parking/delete-plate':                  { action: 'parking/delete-plate', isSocket: true },
+  'POST    /api/v1/parking/add-vehicle':                   { action: 'parking/add-vehicle', isSocket: true },
+  'DELETE  /api/v1/parking/delete-vehicle':                { action: 'parking/delete-vehicle', isSocket: true },
   'POST    /api/v1/parking/toggle-subscription':           { action: 'parking/toggle-subscription', isSocket: true },
 
   //  ╦ ╦╔═╗╔╗ ╦ ╦╔═╗╔═╗╦╔═╔═╗
