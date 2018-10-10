@@ -28,9 +28,9 @@ module.exports = {
 
 
     if( await Subscription.count(objToAdd) ){
-      await Subscription.destroy(objToAdd)
+      await Subscription.destroy(objToAdd);
     } else {
-      await Subscription.create(objToAdd)
+      await Subscription.create(objToAdd);
     }
 
 

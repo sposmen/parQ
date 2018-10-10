@@ -83,15 +83,15 @@ async function listPlates (auth, cb) {
           deDuplicator[row[3]] = {
             plates: [formatPlate(row[1])],
             models: [row[2]],
-            name: row[0],
-            slot: row[3]
+            name: row[0].trim(),
+            slot: row[3].trim()
           };
           finalData.push(deDuplicator[row[3]])
         }
       });
-      cb(null, finalData)
+      return cb(null, finalData);
     } else {
-      cb(null, []);
+      return cb(null, []);
     }
   });
 }

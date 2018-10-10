@@ -88,13 +88,13 @@ module.exports = {
     /*EXTRA ENDPOINTS LIKE BLUEPRINTS*/
 
     _.merge(endpointsByMethodName, {
-        "userVehicles": {
-          "verb": "GET",
-          "url": "/user/:user_id/vehicles",
-          "args": ["user_id"],
-          "protocol": "io.socket"
-        }
+      'userVehicles': {
+        'verb': 'GET',
+        'url': '/user/:user_id/vehicles',
+        'args': ['user_id'],
+        'protocol': 'io.socket'
       }
+    }
     );
 
     var jsCode =

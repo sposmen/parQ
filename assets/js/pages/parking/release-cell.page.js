@@ -1,8 +1,9 @@
-parasails.registerPage('subscriptions', {
+parasails.registerPage('release-cell', {
   //  ╦╔╗╔╦╔╦╗╦╔═╗╦    ╔═╗╔╦╗╔═╗╔╦╗╔═╗
   //  ║║║║║ ║ ║╠═╣║    ╚═╗ ║ ╠═╣ ║ ║╣
   //  ╩╝╚╝╩ ╩ ╩╩ ╩╩═╝  ╚═╝ ╩ ╩ ╩ ╩ ╚═╝
   data: {
+    canRelease: false,
     monthName: '',
     monthData: []
   },
@@ -24,7 +25,7 @@ parasails.registerPage('subscriptions', {
   //  ║║║║ ║ ║╣ ╠╦╝╠═╣║   ║ ║║ ║║║║╚═╗
   //  ╩╝╚╝ ╩ ╚═╝╩╚═╩ ╩╚═╝ ╩ ╩╚═╝╝╚╝╚═╝
   methods: {
-    toggleSuscription: async function (date) {
+    releaseCell: async function (date) {
       await Cloud.toggleSubscription.with({date: date});
       _.extend(this, await Cloud.subscriptions());
     }

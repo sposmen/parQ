@@ -1,10 +1,9 @@
-parasails.registerPage('subscriptions', {
+parasails.registerPage('view-parking', {
   //  ╦╔╗╔╦╔╦╗╦╔═╗╦    ╔═╗╔╦╗╔═╗╔╦╗╔═╗
   //  ║║║║║ ║ ║╠═╣║    ╚═╗ ║ ╠═╣ ║ ║╣
   //  ╩╝╚╝╩ ╩ ╩╩ ╩╩═╝  ╚═╝ ╩ ╩ ╩ ╩ ╚═╝
   data: {
-    monthName: '',
-    monthData: []
+    assignments: []
   },
 
   //  ╦  ╦╔═╗╔═╗╔═╗╦ ╦╔═╗╦  ╔═╗
@@ -13,20 +12,22 @@ parasails.registerPage('subscriptions', {
   beforeMount: async function () {
     // Attach raw data exposed by the server.
     _.extend(this, SAILS_LOCALS);
-    _.extend(this, await Cloud.subscriptions());
+    let assignmentsData = await Cloud.assignments();
+    let plates = this.me.vehicles.map((vehicle) => vehicle.plate)
+    assignmentsData.assignments.forEach((assignment)=>{
+      assignment.canRelease = this.me.fullName === assignment.name && !!_.intersection(plates, assignment.plates);
+    });
+    _.extend(this, assignmentsData);
 
-  },
-  mounted: async function () {
-    //…
   },
 
   //  ╦╔╗╔╔╦╗╔═╗╦═╗╔═╗╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
   //  ║║║║ ║ ║╣ ╠╦╝╠═╣║   ║ ║║ ║║║║╚═╗
   //  ╩╝╚╝ ╩ ╚═╝╩╚═╩ ╩╚═╝ ╩ ╩╚═╝╝╚╝╚═╝
   methods: {
-    toggleSuscription: async function (date) {
-      await Cloud.toggleSubscription.with({date: date});
-      _.extend(this, await Cloud.subscriptions());
-    }
+    // toggleSuscription: async function (date) {
+    //   await Cloud.toggleSubscription.with({date: date});
+    //   _.extend(this, await Cloud.viewParking());
+    // }
   }
 });

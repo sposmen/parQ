@@ -10,20 +10,10 @@ module.exports = {
     }
   },
 
-
   fn: async function (inputs, exits) {
-
-    let currentCellAssigns = await CurrentCellsAssign.find();
-
-    if(currentCellAssigns.length === 0){
-      currentCellAssigns = await cellAssigns();
-      if(currentCellAssigns.length !== 0){
-        await CurrentCellsAssign.createEach(currentCellAssigns)
-       }
-    }
-    return exits.success({cellAssigns: currentCellAssigns});
-
+    let me = await User.findOne({id: this.req.me.id}).populate('vehicles');
+    me.vehicles = me.vehicles.filter((vehicle)=> vehicle.type === 'Car' );
+    return exits.success({me});
   }
-
 
 };

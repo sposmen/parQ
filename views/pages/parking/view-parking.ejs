@@ -1,15 +1,19 @@
-<div id="subscriptions">
+<div id="view-parking">
   <div class="container">
-    <% cellAssigns.forEach((cellAssign) => { %>
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title"><%= cellAssign.name %></h3>
-        </div>
-        <div class="panel-body">
-          <%= cellAssign.plates.join(', ') %>
-        </div>
-      </div>
-    <% }) %>
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Plate(s)</th>
+        <th>Slot</th>
+        <th>Release</th>
+      </tr>
+      <tr v-for="assignment in assignments">
+        <td>{{ assignment.name }}</td>
+        <td>{{ assignment.plates.join(',') }}</td>
+        <td>{{ assignment.slot }}</td>
+        <td>{{ assignment.canRelease ? assignment.name : 'false' }}</td>
+      </tr>
+    </table>
   </div>
 </div>
 <%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>
