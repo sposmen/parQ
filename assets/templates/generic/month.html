@@ -1,0 +1,26 @@
+<div class="container">
+  <br>
+  <table class="table table-striped table-bordered table-condensed">
+    <tr>
+      <th colspan="7" class="text-center"><h3>{{monthName}}</h3></th>
+    </tr>
+    <tr>
+      <th class="text-center">SU</th>
+      <th class="text-center">MO</th>
+      <th class="text-center">TU</th>
+      <th class="text-center">WE</th>
+      <th class="text-center">TH</th>
+      <th class="text-center">FR</th>
+      <th class="text-center">SA</th>
+    </tr>
+    <tr v-for="week in monthData">
+      <td class="text-center" v-for="dayData in week">
+        <toggle-day v-on:updatedata="toggled($event)"
+                    :date="dayData.dateText"
+                    :day="dayData.day"
+                    :subsclass="dayData.class" >
+        </toggle-day>
+      </td>
+    </tr>
+  </table>
+</div>

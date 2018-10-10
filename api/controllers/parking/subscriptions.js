@@ -1,18 +1,19 @@
 module.exports = {
 
-  friendlyName: 'View Subscriptions',
+  friendlyName: 'Subscriptions',
 
   description: 'Update the profile for the logged-in user.',
 
   exits: {
-    success: {
-      viewTemplatePath: 'pages/parking/subscriptions',
-    }
+    // success: {
+    //   viewTemplatePath: 'pages/parking/subscriptions',
+    // }
   },
 
 
   fn: async function (inputs, exits) {
     let monthData = [];
+    let result = {monthData: monthData, monthName: moment().format('MMMM')};
     let startingDay = moment(1, 'DD').startOf('month').startOf('week');
     let endingDate = moment(1, 'DD').endOf('month').endOf('week');
 
@@ -20,7 +21,7 @@ module.exports = {
 
     let subscriptionClass = {};
 
-    subscriptions.forEach((subscription)=>{
+    subscriptions.forEach((subscription) => {
       subscriptionClass[subscription.date] = 'btn-info';
     });
 
@@ -33,7 +34,7 @@ module.exports = {
       }
     });
 
-    subscriptionAssign.forEach((subscription)=>{
+    subscriptionAssign.forEach((subscription) => {
       subscriptionClass[subscription.date] = 'btn-success';
     });
 
@@ -45,7 +46,7 @@ module.exports = {
           dateText: startingDay.day(day).format('YYYY-MM-DD'),
           class: 'btn-danger'
         };
-        if(subscriptionClass.hasOwnProperty(dayData.dateText)){
+        if (subscriptionClass.hasOwnProperty(dayData.dateText)) {
           dayData.class = subscriptionClass[dayData.dateText];
         }
         weekData.push(dayData);
@@ -54,12 +55,7 @@ module.exports = {
       startingDay.add(7, 'day');
     }
 
-    console.log(monthData);
-
-    startingDay = moment(1, 'DD').startOf('month').startOf('week');
-    endingDate = moment(1, 'DD').endOf('month').endOf('week');
-
-    return exits.success({monthName: moment().format('MMMM'), startingDay: startingDay, endingDate: endingDate, subscriptionClass: subscriptionClass});
+    return exits.success(result);
 
   }
 

@@ -9,7 +9,7 @@
  * -----------------------------------------------------------------------------
  */
 
-parasails.registerComponent('toggleSubscription', {
+parasails.registerComponent('toggleDay', {
 
   props: [
     'date',
@@ -17,19 +17,10 @@ parasails.registerComponent('toggleSubscription', {
     'subsclass'
   ],
 
-  data: function () {
-    return {
-      //…
-    };
-  },
-
-  template: `
-    <button @click="click()" type="button" class="btn" v-bind:class="[subsclass]">{{day}}</button>
-  `,
+  template: `<button @click="click()" type="button" class="btn" v-bind:class="[subsclass]">{{day}}</button>`,
   methods: {
     click: async function () {
-      await Cloud.toggleSubscription.with({date: this.date});
-      window.location = '/parking/subscriptions';
+      this.$emit('updatedata', this.date);
     },
 
   }

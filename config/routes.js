@@ -35,7 +35,7 @@ module.exports.routes = {
   'GET /account/profile':           { action: 'account/view-edit-profile' },
   'GET /parking':                   { action: 'parking/view-parking' },
   'GET /parking/vehicles':          { view:   'pages/parking/edit-vehicles' },
-  'GET /parking/subscriptions':     { action: 'parking/view-subscriptions' },
+  'GET /parking/subscriptions':     { view:   'pages/parking/subscriptions' },
 
 
   //  ╔═╗╔═╗╦  ╔═╗╔╗╔╔╦╗╔═╗╔═╗╦╔╗╔╔╦╗╔═╗
@@ -55,6 +55,7 @@ module.exports.routes = {
   'POST    /api/v1/parking/add-vehicle':                   { action: 'parking/add-vehicle', isSocket: true },
   'DELETE  /api/v1/parking/delete-vehicle':                { action: 'parking/delete-vehicle', isSocket: true },
   'POST    /api/v1/parking/toggle-subscription':           { action: 'parking/toggle-subscription', isSocket: true },
+  'GET     /api/v1/parking/subscriptions':                 { action: 'parking/subscriptions', isSocket: true },
 
   //  ╦ ╦╔═╗╔╗ ╦ ╦╔═╗╔═╗╦╔═╔═╗
   //  ║║║║╣ ╠╩╗╠═╣║ ║║ ║╠╩╗╚═╗

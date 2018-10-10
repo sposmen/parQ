@@ -74,6 +74,8 @@ var jsFilesToInject = [
   'dependencies/moment-with-locales.min.js',
   'dependencies/**/*.js',
 
+  // Templates
+  'js/jst.js',
   // First amongst the app-level files, bring in cloud configuration
   'js/cloud.setup.js',
 
